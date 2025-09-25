@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBank - El Banco Digital del Futuro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Principal */
+        .top-header {
+            background: #1e3a5f;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .currency-info {
+            display: flex;
+            gap: 20px;
+        }
+
+        .utility-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .utility-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .utility-links a:hover {
+            color: #00bcd4;
+        }
+
+        /* Header Principal */
+        .main-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e3a5f;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #00bcd4;
+        }
+
+        /* Navegación de Segmentos */
+        .segment-nav {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .segment-nav li {
+            position: relative;
+        }
+
+        .segment-nav a {
+            color: #666;
+            text-decoration: none;
+            padding: 10px 0;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .segment-nav a:hover,
+        .segment-nav a.active {
+            color: #1e3a5f;
+        }
+
+        .segment-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #00bcd4;
+        }
+
+        /* Navegación Principal */
+        .main-nav {
+            background: #00bcd4;
+            padding: 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .nav-item {
+            flex: 1;
+            position: relative;
+        }
+
+        .nav-item > a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            text-align: center;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .nav-item:hover > a {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-item.active > a {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Submenús */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 200;
+        }
+
+        .nav-item:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .submenu-section h4 {
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .submenu-section ul {
+            list-style: none;
+        }
+
+        .submenu-section li {
+            margin-bottom: 8px;
+        }
+
+        .submenu-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .submenu-section a:hover {
+            color: #00bcd4;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: -200px;
+            top: -100px;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #00bcd4;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #00acc1;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Sección de Contenido */
+        .content-section {
+            padding: 60px 0;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #00bcd4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            color: #1e3a5f;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .segment-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+            }
+
+            .submenu-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Superior -->
+    <header class="top-header">
+        <div class="top-header-content">
+            <div class="currency-info">
+                <span>USD 🔽 Compra 58.50</span>
+                <span>Venta 59.80</span>
+            </div>
+            <div class="utility-links">
+                <a href="#" onclick="showContent('canales')">Canales Digitales</a>
+                <a href="#" onclick="showContent('nosotros')">Acerca de Nosotros</a>
+                <a href="#">Mapa</a>
+                <a href="#">Calculadoras</a>
+                <a href="#" onclick="showContent('acceso')">Accede a TuBanco</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showContent('home')">Tecno<span>Bank</span></a>
+            <nav>
+                <ul class="segment-nav">
+                    <li><a href="#" class="active" onclick="setActiveSegment(this, 'personal')">PERSONAL</a></li>
+                    <li><a href="#" onclick="setActiveSegment(this, 'preferente')">PREFERENTE</a></li>
+                    <li><a href="#" onclick="setActiveSegment(this, 'pyme')">PYME</a></li>
+                    <li><a href="#" onclick="setActiveSegment(this, 'empresarial')">EMPRESARIAL</a></li>
+                    <li><a href="#" onclick="setActiveSegment(this, 'gubernamental')">GUBERNAMENTAL</a></li>
+                    <li><a href="#" onclick="setActiveSegment(this, 'internacional')">INTERNACIONAL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Navegación Principal -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="nav-item" onclick="showContent('cuentas')">
+                <a href="#">CUENTAS</a>
+                <div class="submenu">
+                    <div class="submenu-content">
+                        <div class="submenu-section">
+                            <h4>Cuentas de Ahorro</h4>
+                            <ul>
+                                <li><a href="#">Cuenta Digital Plus</a></li>
+                                <li><a href="#">Ahorro Joven</a></li>
+                                <li><a href="#">Cuenta Premium</a></li>
+                                <li><a href="#">Ahorro Infantil</a></li>
+                            </ul>
+                        </div>
+                        <div class="submenu-section">
+                            <h4>Cuentas Corrientes</h4>
+                            <ul>
+                                <li><a href="#">Corriente Básica</a></li>
+                                <li><a href="#">Corriente Empresarial</a></li>
+                                <li><a href="#">Corriente VIP</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showContent('inversiones')">
+                <a href="#">INVERSIONES</a>
+                <div class="submenu">
+                    <div class="submenu-content">
+                        <div class="submenu-section">
+                            <h4>Productos de Inversión</h4>
+                            <ul>
+                                <li><a href="#">Certificados de Depósito</a></li>
+                                <li><a href="#">Fondos Mutuos</a></li>
+                                <li><a href="#">Inversión en Bolsa</a></li>
+                                <li><a href="#">Bonos del Gobierno</a></li>
+                            </ul>
+                        </div>
+                        <div class="submenu-section">
+                            <h4>Planificación</h4>
+                            <ul>
+                                <li><a href="#">Asesoría Financiera</a></li>
+                                <li><a href="#">Planes de Retiro</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showContent('tarjetas')">
+                <a href="#">TARJETAS</a>
+                <div class="submenu">
+                    <div class="submenu-content">
+                        <div class="submenu-section">
+                            <h4>Tarjetas de Crédito</h4>
+                            <ul>
+                                <li><a href="#">Visa Clásica</a></li>
+                                <li><a href="#">Mastercard Gold</a></li>
+                                <li><a href="#">Platinum Elite</a></li>
+                                <li><a href="#">Black Card</a></li>
+                            </ul>
+                        </div>
+                        <div class="submenu-section">
+                            <h4>Tarjetas de Débito</h4>
+                            <ul>
+                                <li><a href="#">Débito Clásica</a></li>
+                                <li><a href="#">Débito Contactless</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showContent('prestamos')">
+                <a href="#">PRÉSTAMOS</a>
+                <div class="submenu">
+                    <div class="submenu-content">
+                        <div class="submenu-section">
+                            <h4>Préstamos Personales</h4>
+                            <ul>
+                                <li><a href="#">Préstamo Rápido</a></li>
+                                <li><a href="#">Préstamo para Vehículo</a></li>
+                                <li><a href="#">Préstamo Vacacional</a></li>
+                            </ul>
+                        </div>
+                        <div class="submenu-section">
+                            <h4>Préstamos Hipotecarios</h4>
+                            <ul>
+                                <li><a href="#">Primera Vivienda</a></li>
+                                <li><a href="#">Vivienda de Interés Social</a></li>
+                                <li><a href="#">Construcción</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showContent('seguros')">
+                <a href="#">SEGUROS</a>
+                <div class="submenu">
+                    <div class="submenu-content">
+                        <div class="submenu-section">
+                            <h4>Seguros de Vida</h4>
+                            <ul>
+                                <li><a href="#">Vida Básico</a></li>
+                                <li><a href="#">Vida Premium</a></li>
+                                <li><a href="#">Vida Familiar</a></li>
+                            </ul>
+                        </div>
+                        <div class="submenu-section">
+                            <h4>Otros Seguros</h4>
+                            <ul>
+                                <li><a href="#">Seguro de Vehículo</a></li>
+                                <li><a href="#">Seguro de Hogar</a></li>
+                                <li><a href="#">Seguro de Viaje</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showContent('servicios')">
+                <a href="#">SERVICIOS</a>
+                <div class="submenu">
+                    <div class="submenu-content">
+                        <div class="submenu-section">
+                            <h4>Servicios Digitales</h4>
+                            <ul>
+                                <li><a href="#">Banca en Línea</a></li>
+                                <li><a href="#">App Móvil</a></li>
+                                <li><a href="#">Pagos en Línea</a></li>
+                            </ul>
+                        </div>
+                        <div class="submenu-section">
+                            <h4>Otros Servicios</h4>
+                            <ul>
+                                <li><a href="#">Remesas</a></li>
+                                <li><a href="#">Cambio de Moneda</a></li>
+                                <li><a href="#">Caja de Seguridad</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showContent('atencion')">
+                <a href="#">ATENCIÓN AL CLIENTE</a>
+                <div class="submenu">
+                    <div class="submenu-content">
+                        <div class="submenu-section">
+                            <h4>Contacto</h4>
+                            <ul>
+                                <li><a href="#">Chat en Vivo</a></li>
+                                <li><a href="#">Teléfono 809-200-1000</a></li>
+                                <li><a href="#">Correo Electrónico</a></li>
+                            </ul>
+                        </div>
+                        <div class="submenu-section">
+                            <h4>Ayuda</h4>
+                            <ul>
+                                <li><a href="#">Preguntas Frecuentes</a></li>
+                                <li><a href="#">Guías y Tutoriales</a></li>
+                                <li><a href="#">Reclamos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section / Contenido Principal -->
+    <section class="hero" id="home-content">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>TuBanco avanza contigo</h1>
+                <p>Descubre un mundo de posibilidades financieras con nuestra plataforma digital innovadora. Gestiona tus finanzas desde cualquier lugar, en cualquier momento.</p>
+                <a href="#" class="cta-button" onclick="showContent('cuentas')">CONOCE MÁS</a>
+            </div>
+            <div class="hero-image">
+                <div style="width: 400px; height: 300px; background: linear-gradient(45deg, #00bcd4, #1e3a5f); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto;">
+                    TecnoBank App
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secciones de Contenido -->
+    <section class="content-section" id="cuentas-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Nuestras Cuentas</h2>
+                <p>Encuentra la cuenta perfecta para tus necesidades financieras</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Cuenta Digital Plus</h3>
+                    <p>Sin costos de mantenimiento, transferencias gratuitas y acceso 24/7 a tu dinero desde nuestra app móvil.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍💼</div>
+                    <h3>Cuenta Premium</h3>
+                    <p>Beneficios exclusivos, asesoría personalizada y acceso a productos financieros especiales.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Ahorro Joven</h3>
+                    <p>Diseñada especialmente para jóvenes entre 18-25 años con beneficios únicos y educación financiera.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="inversiones-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Opciones de Inversión</h2>
+                <p>Haz crecer tu dinero con nuestros productos de inversión</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Certificados de Depósito</h3>
+                    <p>Inversiones seguras con tasas de interés competitivas y plazos flexibles desde 30 días.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Fondos Mutuos</h3>
+                    <p>Diversifica tu portafolio con fondos administrados por expertos en diferentes sectores del mercado.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Asesoría Financiera</h3>
+                    <p>Consulta gratuita con nuestros asesores certificados para planificar tu futuro financiero.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="tarjetas-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Tarjetas de Crédito y Débito</h2>
+                <p>Encuentra la tarjeta ideal para tu estilo de vida</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Platinum Elite</h3>
+                    <p>Tarjeta premium con límites altos, acceso a salas VIP en aeropuertos y programa de recompensas exclusivo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Mastercard Gold</h3>
+                    <p>Beneficios especiales en compras, seguros incluidos y programa de puntos que nunca expiran.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Débito Contactless</h3>
+                    <p>Pagos rápidos y seguros con tecnología contactless, control total desde la app móvil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="prestamos-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Préstamos a tu Medida</h2>
+                <p>Financiamiento flexible para todos tus proyectos</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Préstamo Vehicular</h3>
+                    <p>Financia hasta el 90% del valor de tu vehículo nuevo o usado con tasas preferenciales.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Préstamo Hipotecario</h3>
+                    <p>Cumple el sueño de tu casa propia con nuestros planes hipotecarios hasta 30 años plazo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Préstamo Rápido</h3>
+                    <p>Dinero en efectivo en menos de 24 horas, sin garantías para montos hasta RD$500,000.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="seguros-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Protección y Seguros</h2>
+                <p>Protege lo que más valoras con nuestros seguros</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Seguro de Vida Familiar</h3>
+                    <p>Protección completa para toda tu familia con cobertura amplia y primas accesibles.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Seguro Vehicular</h3>
+                    <p>Cobertura total para tu vehículo con asistencia 24/7 y talleres afiliados en todo el país.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✈️</div>
+                    <h3>Seguro de Viaje</h3>
+                    <p>Viaja tranquilo con cobertura médica internacional y protección de equipaje.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="servicios-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Servicios Digitales</h2>
+                <p>La banca digital más avanzada a tu alcance</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>App TecnoBank</h3>
+                    <p>Realiza todas tus operaciones bancarias desde tu móvil con seguridad biométrica avanzada.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Banca en Línea</h3>
+                    <p>Acceso completo a tu cuenta desde cualquier computador con encriptación de nivel bancario.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Pagos Digitales</h3>
+                    <p>Paga servicios, transferencias inmediatas y pagos QR en miles de comercios aliados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="atencion-content">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Atención al Cliente</h2>
+                <p>Estamos aquí para ayudarte cuando lo necesites</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Chat 24/7</h3>
+                    <p>Asistencia inmediata a través de chat en línea con agentes especializados disponibles siempre.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>Línea Directa</h3>
+                    <p>Llama al 809-200-1000 y recibe atención personalizada de nuestro equipo de expertos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Red de Sucursales</h3>
+                    <p>Más de 150 sucursales y 500 cajeros automáticos distribuidos en todo el territorio nacional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentSegment = 'personal';
+
+        function setActiveSegment(element, segment) {
+            // Remover clase active de todos los enlaces
+            document.querySelectorAll('.segment-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Agregar clase active al enlace clickeado
+            element.classList.add('active');
+            currentSegment = segment;
+        }
+
+        function showContent(section) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Ocultar hero section
+            document.getElementById('home-content').style.display = 'none';
+            
+            // Mostrar la sección seleccionada
+            if (section === 'home') {
+                document.getElementById('home-content').style.display = 'block';
+            } else {
+                const targetSection = document.getElementById(section + '-content');
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+            }
+            
+            // Remover clase active de todos los nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Agregar clase active al nav item correspondiente
+            if (section !== 'home') {
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        // Función para mostrar contenido adicional
+        function showAdditionalContent(type) {
+            let content = '';
+            
+            switch(type) {
+                case 'canales':
+                    content = `
+                        <div class="section-content">
+                            <div class="section-header">
+                                <h2>Canales Digitales</h2>
+                                <p>Múltiples formas de acceder a nuestros servicios</p>
+                            </div>
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">📱</div>
+                                    <h3>App Móvil</h3>
+                                    <p>Descarga nuestra app disponible para iOS y Android con todas las funcionalidades bancarias.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🏧</div>
+                                    <h3>Cajeros Automáticos</h3>
+                                    <p>Red de más de 500 cajeros automáticos con tecnología contactless y depósitos inmediatos.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">☎️</div>
+                                    <h3>Banca Telefónica</h3>
+                                    <p>Realiza consultas y operaciones básicas llamando a nuestra línea de atención 24 horas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'nosotros':
+                    content = `
+                        <div class="section-content">
+                            <div class="section-header">
+                                <h2>Acerca de TecnoBank</h2>
+                                <p>Innovación y excelencia en servicios financieros desde 1995</p>
+                            </div>
+                            <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                                <h3 style="color: #1e3a5f; margin-bottom: 20px;">Nuestra Historia</h3>
+                                <p style="margin-bottom: 20px; line-height: 1.8;">TecnoBank nació con la visión de revolucionar la banca tradicional mediante la implementación de tecnologías de vanguardia. Durante más de 25 años, hemos sido pioneros en innovación financiera en la República Dominicana.</p>
+                                
+                                <h3 style="color: #1e3a5f; margin-bottom: 20px; margin-top: 40px;">Nuestra Misión</h3>
+                                <p style="margin-bottom: 20px; line-height: 1.8;">Democratizar el acceso a servicios financieros de calidad mundial, utilizando la tecnología como motor de inclusión financiera y crecimiento económico sostenible.</p>
+                                
+                                <h3 style="color: #1e3a5f; margin-bottom: 20px; margin-top: 40px;">Nuestros Valores</h3>
+                                <ul style="line-height: 2;">
+                                    <li><strong>Innovación:</strong> Constantemente buscamos nuevas formas de mejorar la experiencia de nuestros clientes.</li>
+                                    <li><strong>Transparencia:</strong> Mantenemos comunicación clara y honesta en todas nuestras operaciones.</li>
+                                    <li><strong>Seguridad:</strong> Protegemos la información y los recursos de nuestros clientes con los más altos estándares.</li>
+                                    <li><strong>Compromiso Social:</strong> Contribuimos al desarrollo económico y social de nuestras comunidades.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'acceso':
+                    content = `
+                        <div class="section-content">
+                            <div class="section-header">
+                                <h2>Accede a TuBanco</h2>
+                                <p>Inicia sesión en tu cuenta desde cualquier dispositivo</p>
+                            </div>
+                            <div style="max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                                <div style="text-align: center; margin-bottom: 30px;">
+                                    <div style="width: 80px; height: 80px; background: #00bcd4; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px;">🔐</div>
+                                    <h3 style="color: #1e3a5f;">Banca en Línea</h3>
+                                </div>
+                                
+                                <form style="display: flex; flex-direction: column; gap: 20px;">
+                                    <div>
+                                        <label style="display: block; margin-bottom: 5px; color: #666; font-weight: 500;">Usuario o Cédula</label>
+                                        <input type="text" placeholder="Ingresa tu usuario" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px;">
+                                    </div>
+                                    
+                                    <div>
+                                        <label style="display: block; margin-bottom: 5px; color: #666; font-weight: 500;">Contraseña</label>
+                                        <input type="password" placeholder="Ingresa tu contraseña" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px;">
+                                    </div>
+                                    
+                                    <button type="button" style="background: #00bcd4; color: white; padding: 15px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer;" onmouseover="this.style.background='#00acc1'" onmouseout="this.style.background='#00bcd4'">
+                                        INICIAR SESIÓN
+                                    </button>
+                                </form>
+                                
+                                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                                    <a href="#" style="color: #00bcd4; text-decoration: none; margin-right: 20px;">¿Olvidaste tu contraseña?</a>
+                                    <a href="#" style="color: #00bcd4; text-decoration: none;">Regístrate aquí</a>
+                                </div>
+                                
+                                <div style="margin-top: 30px; text-align: center;">
+                                    <p style="margin-bottom: 15px; color: #666;">También puedes acceder desde:</p>
+                                    <div style="display: flex; justify-content: center; gap: 20px;">
+                                        <a href="#" style="color: #1e3a5f; text-decoration: none; padding: 10px 20px; border: 2px solid #1e3a5f; border-radius: 25px; transition: all 0.3s;" onmouseover="this.style.background='#1e3a5f'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='#1e3a5f'">📱 App Store</a>
+                                        <a href="#" style="color: #1e3a5f; text-decoration: none; padding: 10px 20px; border: 2px solid #1e3a5f; border-radius: 25px; transition: all 0.3s;" onmouseover="this.style.background='#1e3a5f'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='#1e3a5f'">🤖 Google Play</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            // Crear y mostrar contenido dinámico
+            if (content) {
+                // Ocultar todas las secciones existentes
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('home-content').style.display = 'none';
+                
+                // Crear nueva sección temporal
+                let tempSection = document.getElementById('temp-content');
+                if (!tempSection) {
+                    tempSection = document.createElement('section');
+                    tempSection.className = 'content-section';
+                    tempSection.id = 'temp-content';
+                    document.body.appendChild(tempSection);
+                }
+                
+                tempSection.innerHTML = content;
+                tempSection.classList.add('active');
+            }
+        }
+
+        // Event listeners para los enlaces del header superior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Agregar event listeners a los enlaces del header superior
+            const utilityLinks = document.querySelectorAll('.utility-links a');
+            utilityLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const action = this.getAttribute('onclick');
+                    if (action) {
+                        eval(action);
+                    }
+                });
+            });
+            
+            // Agregar efectos hover a las tarjetas
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.2)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                });
+            });
+        });
+
+        // Función para el buscador (simulado)
+        function toggleSearch() {
+            alert('Función de búsqueda - En desarrollo');
+        }
+
+        // Simulación de login
+        function handleLogin() {
+            const usuario = document.querySelector('input[type="text"]').value;
+            const password = document.querySelector('input[type="password"]').value;
+            
+            if (usuario && password) {
+                alert('¡Bienvenido a TecnoBank! (Esto es una simulación)');
+            } else {
+                alert('Por favor completa todos los campos');
+            }
+        }
