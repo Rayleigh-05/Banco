@@ -120,12 +120,15 @@
         .main-nav {
             background: #00bcd4;
             padding: 0;
+            position: relative;
+            z-index: 999;
         }
 
         .nav-content {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
+            position: relative;
         }
 
         .nav-item {
@@ -156,14 +159,17 @@
             position: absolute;
             top: 100%;
             left: 0;
-            right: 0;
             background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s;
-            z-index: 200;
+            z-index: 1000;
+            border-radius: 0 0 8px 8px;
+            min-width: 400px;
+            width: max-content;
+            max-width: 800px;
         }
 
         .nav-item:hover .submenu {
@@ -174,15 +180,31 @@
 
         .submenu-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 25px;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        /* Ajustes para submenús específicos */
+        .nav-item:nth-child(n+4) .submenu {
+            left: auto;
+            right: 0;
+        }
+
+        .submenu-section {
+            min-width: 160px;
         }
 
         .submenu-section h4 {
             color: #1e3a5f;
             margin-bottom: 15px;
             font-size: 16px;
+            font-weight: bold;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 8px;
+            white-space: normal;
         }
 
         .submenu-section ul {
@@ -190,18 +212,26 @@
         }
 
         .submenu-section li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .submenu-section a {
             color: #666;
             text-decoration: none;
             font-size: 14px;
-            transition: color 0.3s;
+            line-height: 1.4;
+            padding: 6px 0;
+            display: block;
+            transition: all 0.3s;
+            border-radius: 3px;
+            white-space: normal;
+            word-wrap: break-word;
         }
 
         .submenu-section a:hover {
             color: #00bcd4;
+            background-color: #f5f5f5;
+            padding-left: 8px;
         }
 
         /* Hero Section */
